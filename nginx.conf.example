@@ -1,0 +1,24 @@
+events { }
+
+http {
+    lua_package_path "$prefix/lua/?.lua;;";
+    resolver 8.8.8.8;
+
+    default_type text/plain;
+
+    server {
+        listen       8080;
+        server_name  localhost;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+        }
+
+        location /test {
+            access_by_lua_file "lua/yoauth.lua";
+            add_header Content-Type text/plain;
+            content_by_lua "ngx.say('id=' .. ngx.req.get_headers()['x-yoauth-id'] .. ' name=' .. ngx.req.get_headers()['x-yoauth-yosername'])";
+        }
+    }
+}
