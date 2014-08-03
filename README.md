@@ -1,6 +1,6 @@
 About this Project
 ==================
-This is a module that implements [Yoauth](http://yoauth.herokuapp.com/) for use with [ngx_lua](http://wiki.nginx.org/HttpLuaModule). It allows you to use [Yo](http://justyo.co) to authenticate your users anywhere you would use HTTP basic auth, with even less effort.
+This is a module that implements [Yoauth](http://yoauth.herokuapp.com/) for use with [ngx_lua](http://wiki.nginx.org/HttpLuaModule). It allows you to use [Yo](http://justyo.co) to authenticate your users anywhere you would use HTTP basic auth, but with even less effort.
 
 Installation
 ============
@@ -9,11 +9,12 @@ Installation
  - yoauth.lua (included)
  - dkjson.lua ([get it here](http://dkolf.de/src/dkjson-lua.fsl/home))
  - lua-resty-http ([get it here](https://github.com/liseen/lua-resty-http), copy the lib/resty directory in)
-3. Ensure your nginx `lua_package_path` includes this directory (see nginx.conf.example)
+3. Ensure your nginx `lua_package_path` includes this directory (see nginx.conf.example).
+4. Ensure you have a `resolver` defined (8.8.8.8 is a good choice).
 
 Usage
 =====
-1. Place `access_by_lua_file "lua/yoauth.lua"` in a location block to enable Yoauth for that block
+1. Place `access_by_lua_file "lua/yoauth.lua"` in a location block to enable Yoauth for that block.
 2. Use the `X-Yoauth-Yosername` and `X-Yoauth-Id` headers to access the authenticated user's yo username and id, respectively.
 
 Caveats
